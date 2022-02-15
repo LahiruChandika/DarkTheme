@@ -23,9 +23,14 @@ import javax.swing.border.TitledBorder;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class First {
 
+	protected static final int PLAIN_MESSAGE = 0;
+	protected static final int QUESTION_MESSAGE = 0;
+	protected static final int INFORMATION_MESSAGE = 0;
 	private JFrame frame;
 	private Second second;
 	
@@ -62,7 +67,7 @@ public class First {
 				
 				try {
 					First window = new First();
-					window.frame.setMinimumSize(new Dimension(450,400));
+					window.frame.setMinimumSize(new Dimension(650,600));
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -106,6 +111,15 @@ public class First {
 		});
 		panel.add(tglbtnNewToggleButton);
 		
+		JButton btnNewButton = new JButton("Click");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(frame , "clicked event", "Tittle" ,JOptionPane.CLOSED_OPTION);
+			}
+		});
+		panel.add(btnNewButton);
+		
 		JToolBar toolBar = new JToolBar();
 		toolBar.setOrientation(SwingConstants.VERTICAL);
 		frame.getContentPane().add(toolBar, BorderLayout.WEST);
@@ -113,16 +127,20 @@ public class First {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblNewLabel.setIconTextGap(2);
-		lblNewLabel.setIcon(First.getSQIcon("/outline_person_black_24dp.png",30,30));
+		lblNewLabel.setIcon(First.getSQIcon("/outline_person_black_24dp.png",45,45));
 		toolBar.add(lblNewLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(First.getSQIcon("/outline_dashboard_black_24dp.png",30,30));
+		lblNewLabel_2.setIcon(First.getSQIcon("/outline_dashboard_black_24dp.png",45,45));
 		toolBar.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(First.getSQIcon("/outline_email_black_24dp.png",30,30));
+		lblNewLabel_1.setIcon(First.getSQIcon("/outline_email_black_24dp.png",45,45));
 		toolBar.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(First.getSQIcon("/outline_calendar_today_black_24dp.png", 45,45));
+		toolBar.add(lblNewLabel_3);
 		
 		
 		JPanel panel_1 = new JPanel();
