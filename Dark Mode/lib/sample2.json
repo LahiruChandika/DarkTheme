@@ -1,26 +1,84 @@
 {
-	"id": "0001",
-	"type": "donut",
-	"name": "Cake",
-	"ppu": 0.55,
-	"batters":
-		{
-			"batter":
-				[
-					{ "id": "1001", "type": "Regular" },
-					{ "id": "1002", "type": "Chocolate" },
-					{ "id": "1003", "type": "Blueberry" },
-					{ "id": "1004", "type": "Devil's Food" }
-				]
-		},
-	"topping":
-		[
-			{ "id": "5001", "type": "None" },
-			{ "id": "5002", "type": "Glazed" },
-			{ "id": "5005", "type": "Sugar" },
-			{ "id": "5007", "type": "Powdered Sugar" },
-			{ "id": "5006", "type": "Chocolate with Sprinkles" },
-			{ "id": "5003", "type": "Chocolate" },
-			{ "id": "5004", "type": "Maple" }
-		]
+  "allowsChildren": true,
+  "userObject": "JTree",
+  "children": [
+    {
+      "allowsChildren": true,
+      "userObject": "colors",
+      "children": [
+        {
+          "allowsChildren": true,
+          "userObject": "blue"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "violet"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "red"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "yellow"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "orange"
+        }
+      ]
+    },
+    {
+      "allowsChildren": true,
+      "userObject": "sports",
+      "children": [
+        {
+          "allowsChildren": true,
+          "userObject": "basketball"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "soccer"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "football"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "hockey"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "cricket"
+        }
+      ]
+    },
+    {
+      "allowsChildren": true,
+      "userObject": "food",
+      "children": [
+        {
+          "allowsChildren": true,
+          "userObject": "hot dogs"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "pizza"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "ravioli"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "bananas"
+        },
+        {
+          "allowsChildren": true,
+          "userObject": "cake"
+        }
+      ]
+    }
+  ]
 }

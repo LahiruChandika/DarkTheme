@@ -48,39 +48,34 @@ public class Second extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
 	
-//	private Reader reader = Files.newBufferedReader(Paths.get("user.json"));
-//	private Gson json = new Gson();
+	static JProgressBar b;
+	
+
 	String json;
 	DefaultMutableTreeNode x;
 	private Gson gson = new GsonBuilder()
     		.registerTypeAdapter(DefaultMutableTreeNode.class, new DefaultMutableTreeNodeSerializer())
             .registerTypeAdapter(DefaultMutableTreeNode.class, new DefaultMutableTreeNodeDeserializer())
+            .setPrettyPrinting()
             .create();
-//	String x;
+
 	public Second() {
-		
+
 		try {
-		    
 
 		    // create a reader
 		    Reader reader = Files.newBufferedReader(Paths.get("lib/sample2.json"));
 
 		    x = this.gson.fromJson(reader, DefaultMutableTreeNode.class);
-		    System.out.println(this.gson.toJson(x).toString());
+		    //System.out.println(this.gson.toJson(x).toString());
 		    reader.close();
 
 		} catch (Exception ex) {
 		    ex.printStackTrace();
 		}
 		
-//		Complextreeobject obj = new complextreeobject(); 
-//		Gson gson = new gson(); 
-//		string json = gson.tojson(obj);  
-
 		setLayout(new BorderLayout(0, 0));
-		
-		
-		
+
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setDividerSize(2);
 		add(splitPane, BorderLayout.CENTER);
@@ -131,42 +126,7 @@ public class Second extends JPanel {
 		JTree tree = new JTree();  // create a sample tree
 		Object topNode = tree.getModel().getRoot();  // a DefaultMutableTreeNode
 		
-//		String jsonString = this.gson.toJson(topNode);
-//		System.out.println(jsonString);
-		
-//		DefaultMutableTreeNode topNode2 = this.gson.fromJson(x, DefaultMutableTreeNode.class);
-//		DefaultMutableTreeNode topNode2 = this.gson.fromJson(jsonString, DefaultMutableTreeNode.class);
-//		System.out.println(topNode2.toString());
 		tree.setModel(new DefaultTreeModel(x));
-		
-//		tree.setModel(new DefaultTreeModel(
-//			new DefaultMutableTreeNode("JTree") {
-//				{
-//					DefaultMutableTreeNode node_1;
-//					DefaultMutableTreeNode node_2;
-//					node_1 = new DefaultMutableTreeNode("colors");
-//						node_2 = new DefaultMutableTreeNode("blue");
-//							node_2.add(new DefaultMutableTreeNode("light blue"));
-//						node_1.add(node_2);
-//						node_1.add(new DefaultMutableTreeNode("violet"));
-//						node_1.add(new DefaultMutableTreeNode("red"));
-//						node_1.add(new DefaultMutableTreeNode("yellow"));
-//					add(node_1);
-//					node_1 = new DefaultMutableTreeNode("sports");
-//						node_1.add(new DefaultMutableTreeNode("basketball"));
-//						node_1.add(new DefaultMutableTreeNode("soccer"));
-//						node_1.add(new DefaultMutableTreeNode("football"));
-//						node_1.add(new DefaultMutableTreeNode("hockey"));
-//					add(node_1);
-//					node_1 = new DefaultMutableTreeNode("food");
-//						node_1.add(new DefaultMutableTreeNode("hot dogs"));
-//						node_1.add(new DefaultMutableTreeNode("pizza"));
-//						node_1.add(new DefaultMutableTreeNode("ravioli"));
-//						node_1.add(new DefaultMutableTreeNode("bananas"));
-//					add(node_1);
-//				}
-//			}
-//		));
 		
 		scrollPane.setViewportView(tree);
 		
@@ -197,9 +157,11 @@ public class Second extends JPanel {
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		panel_3.add(scrollPane_2, BorderLayout.CENTER);
+		
 
 	}
 
+	
 }
 
 class DefaultMutableTreeNodeSerializer implements JsonSerializer<DefaultMutableTreeNode> {
