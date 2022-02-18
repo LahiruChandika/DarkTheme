@@ -56,10 +56,9 @@ public class First {
         
         SwingUtilities.updateComponentTreeUI(frame);
     }
-
-	
 	
 	public static void main(String[] args) {
+	
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -86,11 +85,8 @@ public class First {
 		
 		second = new Second();
 		toolBar = new ToolBar();
-		b = new JProgressBar();
-		b.setForeground(Color.BLUE);
 		
-		initialize();
-		
+		initialize();	
 	}
 
 	/**
@@ -98,7 +94,7 @@ public class First {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 488, 403);
+		frame.setBounds(100, 100, 490, 407);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -108,7 +104,9 @@ public class First {
 		
 
 		JProgressBar progressBar = new JProgressBar();
+		b = new JProgressBar();
 		b.setValue(0);
+		b.setForeground(Color.BLUE);
 		b.setStringPainted(true);
 		panel.add(b);
 		

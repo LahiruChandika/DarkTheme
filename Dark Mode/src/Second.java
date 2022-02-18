@@ -43,13 +43,14 @@ import com.google.gson.reflect.TypeToken;
 //import DefaultMutableTreeNodeDeserializer.POJO;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.awt.GridLayout;
 
 public class Second extends JPanel {
-	private JTextField textField;
 	private JTextField textField_1;
 	
 	static JProgressBar b;
 	
+	private Graph graph;
 
 	String json;
 	DefaultMutableTreeNode x;
@@ -60,6 +61,8 @@ public class Second extends JPanel {
             .create();
 
 	public Second() {
+		
+		graph = new Graph();
 
 		try {
 
@@ -83,30 +86,9 @@ public class Second extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setSize(new Dimension(120, 0));
 		splitPane.setLeftComponent(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setName("Select");
-		comboBox.setMinimumSize(new Dimension(120, 29));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"java ", "c++", "python", "php"}));
-		panel.add(comboBox);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setMinimumSize(new Dimension(0, 0));
-		spinner.setModel(new SpinnerDateModel(new Date(1644777000000L), null, null, Calendar.DAY_OF_YEAR));
-		panel.add(spinner);
-		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnNewButton = new JButton("open");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		panel.add(btnNewButton);
+		panel.setLayout(new BorderLayout(0, 0));
+		panel.add(graph);
+		graph.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panel_1 = new JPanel();
 		splitPane.setRightComponent(panel_1);
@@ -157,11 +139,9 @@ public class Second extends JPanel {
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		panel_3.add(scrollPane_2, BorderLayout.CENTER);
-		
 
 	}
 
-	
 }
 
 class DefaultMutableTreeNodeSerializer implements JsonSerializer<DefaultMutableTreeNode> {
