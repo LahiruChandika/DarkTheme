@@ -143,11 +143,6 @@ public class First {
 		});
 		panel.add(btnNewButton);
 		
-//		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-		SteelCheckBox st = new SteelCheckBox();
-		st.setName("adad");
-		panel.add(st);
-		
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Main", TitledBorder.LEADING, TitledBorder.TOP, null, null));
