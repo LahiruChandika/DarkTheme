@@ -1,0 +1,26 @@
+{
+  "allowsChildren": true,
+  "seriesName": "series2",
+  "children": [
+    {
+	"allowsChildren": true,
+	"Value": "9.000",
+	"categoryName":"1"
+    },
+    {
+	"allowsChildren": true,
+	"Value": "7.000",
+	"categoryName":"2"
+    },
+    {
+	"allowsChildren": true,
+	"Value": "6.000",
+	"categoryName":"3"
+    },
+    {
+	"allowsChildren": true,
+	"Value": "8.000",
+	"categoryName":"4"
+    },
+   ]
+}

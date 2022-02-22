@@ -19,14 +19,20 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+
+import eu.hansolo.custom.SteelCheckBox;
+import eu.hansolo.custom.SteelCheckBoxUI;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import javax.swing.JCheckBox;
 
 
 public class First {
@@ -35,8 +41,9 @@ public class First {
 	private JFrame frame;
 	private Second second;
 	private ToolBar toolBar;	
-	
+	static int x;
 	static JProgressBar b;
+	
 	
     public static void changeLaf(JFrame frame, String laf) {
         if (laf.equals("Dark")) {
@@ -57,10 +64,10 @@ public class First {
         SwingUtilities.updateComponentTreeUI(frame);
     }
 	
-	public static void main(String[] args) {
-	
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args) throws UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel( new FlatLightLaf() );
+		
+		First window = new First();
 				try {
 	        	    UIManager.setLookAndFeel( new FlatLightLaf() );
 	        	} catch( Exception e ) {
@@ -68,15 +75,19 @@ public class First {
 	        	}
 				
 				try {
-					First window = new First();
+					
 					window.frame.setMinimumSize(new Dimension(650,600));
 					window.frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-		});
+		
+		window.loop();
+	
 	}
+	
 
 	/**
 	 * Create the application.
@@ -103,14 +114,12 @@ public class First {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 
-		JProgressBar progressBar = new JProgressBar();
-		b = new JProgressBar();
+		b = new JProgressBar(0,1000);
 		b.setValue(0);
 		b.setForeground(Color.BLUE);
 		b.setStringPainted(true);
 		panel.add(b);
 		
-		fill();
 		
 		JToggleButton tglbtnNewToggleButton = new JToggleButton("Change theme");
 		tglbtnNewToggleButton.addActionListener(new ActionListener() {
@@ -133,6 +142,11 @@ public class First {
 			}
 		});
 		panel.add(btnNewButton);
+		
+//		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
+		SteelCheckBox st = new SteelCheckBox();
+		st.setName("adad");
+		panel.add(st);
 		
 		
 		JPanel panel_1 = new JPanel();
@@ -166,27 +180,22 @@ public class First {
 		return new ImageIcon(image);
 	}
 	
-	public static void fill()
-	{
-		int i = 0;
-        try {
-            while (i <= 100) {
-                
-                if (i > 30 && i < 70)
-                    b.setString("wait for sometime");
-                else if (i > 70)
-                    b.setString("almost finished loading");
-                else
-                    b.setString("loading started");
- 
-                b.setValue(i + 10);
- 
-                Thread.sleep(500);
-                i += 20;
-            }
-        }
-        catch (Exception e) {
-        }
-	}
+	
+	public void loop()
+	  {
+	    int i=0; 
+	    while(i <= 1000)
+	    {
+	      // fills the bar
+	      b.setValue(i);  
+	      i = i + 10;  
+	      try
+	      {
+	        // delay the thread 
+	        Thread.sleep(120);
+	      }
+	      catch(Exception e){}
+	    }
+	  }
 		
 }

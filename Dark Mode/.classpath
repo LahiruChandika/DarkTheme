@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/flatlaf-2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.19/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="lib/SteelCheckBox.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
