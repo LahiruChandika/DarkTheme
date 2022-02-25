@@ -1,11 +1,16 @@
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,15 +29,23 @@ import javax.swing.border.TitledBorder;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import eu.hansolo.custom.SteelCheckBox;
 import eu.hansolo.custom.SteelCheckBoxUI;
+import gui.util.EventSwitchSelected;
+import gui.util.SwitchButton;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
 
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import javax.swing.JCheckBox;
+import java.awt.Component;
+import javax.swing.JSeparator;
 
 
 public class First {
@@ -43,6 +56,8 @@ public class First {
 	private ToolBar toolBar;	
 	static int x;
 	static JProgressBar b;
+	private SwitchButton switchbutton;
+	private JLabel lblNewLabel_1;
 	
 	
     public static void changeLaf(JFrame frame, String laf) {
@@ -64,7 +79,7 @@ public class First {
         SwingUtilities.updateComponentTreeUI(frame);
     }
 	
-	public static void main(String[] args) throws UnsupportedLookAndFeelException {
+	public static void main(String[] args) throws UnsupportedLookAndFeelException, JsonSyntaxException, JsonIOException, IOException {
 		UIManager.setLookAndFeel( new FlatLightLaf() );
 		
 		First window = new First();
@@ -88,51 +103,82 @@ public class First {
 	
 	}
 	
-
+	public void clock(){
+		
+		Thread clock = new Thread() 
+		{
+			public void run() 
+			{
+				try {
+					for(;;) {
+					Calendar cal = new GregorianCalendar();
+					int day= cal.get(Calendar.DAY_OF_MONTH);
+					int month= cal.get(Calendar.MONTH);
+					int year= cal.get(Calendar.YEAR);
+					
+					int second= cal.get(Calendar.SECOND);
+					int minute= cal.get(Calendar.MINUTE);
+					int hour= cal.get(Calendar.HOUR);
+					
+					lblNewLabel_1.setText("Time "+hour+":"+minute+":"+second+"  Date "+year+"/"+month+"/"+day+" " );
+					
+					sleep(1000);
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		};
+		
+		clock.start();
+	}
+	
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws JsonIOException 
+	 * @throws JsonSyntaxException 
 	 */
-	public First() {
+	public First() throws JsonSyntaxException, JsonIOException, IOException {
 		
 		second = new Second();
+		
+		JSeparator separator = new JSeparator();
+		separator.setPreferredSize(new Dimension(0, 20));
+		second.add(separator, BorderLayout.NORTH);
 		toolBar = new ToolBar();
+		switchbutton =  new SwitchButton();
 		
 		initialize();	
+		clock();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
+	/*
+	 * *Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 490, 407);
+		frame.setBounds(100, 100, 488, 407);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Menu bar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(null);
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-
+		lblNewLabel_1 = new JLabel("Clock");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panel.add(lblNewLabel_1);
+		
+		
 		b = new JProgressBar(0,1000);
+		b.setPreferredSize(new Dimension(120, 25));
 		b.setValue(0);
-		b.setForeground(Color.BLUE);
+		b.setForeground(new Color(111, 209, 196));
 		b.setStringPainted(true);
 		panel.add(b);
 		
-		
-		JToggleButton tglbtnNewToggleButton = new JToggleButton("Change theme");
-		tglbtnNewToggleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(tglbtnNewToggleButton.isSelected()){
-					changeLaf(frame, "Dark");
-				}else {
-					changeLaf(frame, "Light");
-				}
-			}
-		});
-		panel.add(tglbtnNewToggleButton);
-
 		
 		JButton btnNewButton = new JButton("Click");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -143,9 +189,31 @@ public class First {
 		});
 		panel.add(btnNewButton);
 		
+		JLabel lblNewLabel = new JLabel("Dark mode");
+		lblNewLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel.add(lblNewLabel);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panel.add(panel_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		panel_3.add(switchbutton, BorderLayout.NORTH);
+		switchbutton.addEventSelected(new EventSwitchSelected() {
+			
+			@Override
+			public void onSelected(boolean selected) {
+				if (selected) {
+					changeLaf(frame, "Dark");
+				} else {
+					changeLaf(frame, "Light");
+				}
+				
+			}
+		});
+		
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Main", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		panel_1.add(second);
@@ -183,7 +251,7 @@ public class First {
 	    {
 	      // fills the bar
 	      b.setValue(i);  
-	      i = i + 10;  
+	      i = i + 20;  
 	      try
 	      {
 	        // delay the thread 

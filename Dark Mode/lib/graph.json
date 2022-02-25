@@ -1,26 +1,92 @@
-{
-  "allowsChildren": true,
-  "seriesName": "series2",
-  "children": [
-    {
-	"allowsChildren": true,
-	"Value": "9.000",
-	"categoryName":"1"
-    },
-    {
-	"allowsChildren": true,
-	"Value": "7.000",
-	"categoryName":"2"
-    },
-    {
-	"allowsChildren": true,
-	"Value": "6.000",
-	"categoryName":"3"
-    },
-    {
-	"allowsChildren": true,
-	"Value": "8.000",
-	"categoryName":"4"
-    },
-   ]
-}
+[
+	[
+		{
+			"Value": "9.000",
+			"Series" : "target",
+			"categoryName":"1"
+		},
+		{
+			"Value": "9.000",
+			"Series" : "target",
+			"categoryName":"2"
+		},
+		{
+			"Value": "9.000",
+			"Series" : "target",
+			"categoryName":"3"
+		},
+		{
+			"Value": "9.000",
+			"Series" : "target",
+			"categoryName":"4"
+		}
+	],
+	[
+    	{
+			"Value": "10.000",
+			"Series" : "1st user",
+			"categoryName":"1"
+		},
+		{
+			"Value": "8.000",
+			"Series" : "1st user",
+			"categoryName":"2"
+		},
+		{
+			"Value": "9.500",
+			"Series" : "1st user",
+			"categoryName":"3"
+		},
+		{
+			"Value": "7.000",
+			"Series" : "1st user",
+			"categoryName":"4"
+		}
+	],
+	[
+    	{
+			"Value": "7.000",
+			"Series" : "2nd user",
+			"categoryName":"1"
+    	},
+    	{
+			"Value": "9.500",
+			"Series" : "2nd user",
+			"categoryName":"2"
+    	},
+		{
+			"Value": "10.500",
+			"Series" : "2nd user",
+			"categoryName":"3"
+		},
+		{
+			"Value": "8.000",
+			"Series" : "2nd user",
+			"categoryName":"4"
+		}
+	],
+	[	
+		{
+			"Value": "10.000",
+			"Series" : "3rd user",
+			"categoryName":"1"
+		},
+		{
+			"Value": "9.000",
+			"Series" : "3rd user",
+			"categoryName":"2"
+		},
+		{
+			"Value": "7.500",
+			"Series" : "3rd user",
+			"categoryName":"3"
+		},
+		{
+			"Value": "9.000",
+			"Series" : "3rd user",
+			"categoryName":"4"
+		}
+	]
+]
+
+

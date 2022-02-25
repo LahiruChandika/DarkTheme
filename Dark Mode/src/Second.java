@@ -22,6 +22,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -34,10 +35,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 //import DefaultMutableTreeNodeDeserializer.POJO;
@@ -60,17 +63,15 @@ public class Second extends JPanel {
             .setPrettyPrinting()
             .create();
 
-	public Second() {
+	public Second() throws JsonSyntaxException, JsonIOException, IOException {
 		
 		graph = new Graph();
 
 		try {
 
-		    // create a reader
 		    Reader reader = Files.newBufferedReader(Paths.get("lib/sample2.json"));
 
-		    x = this.gson.fromJson(reader, DefaultMutableTreeNode.class);
-		    //System.out.println(this.gson.toJson(x).toString());
+		    x = this.gson.fromJson(reader, DefaultMutableTreeNode.class);   
 		    reader.close();
 
 		} catch (Exception ex) {
