@@ -1,3 +1,4 @@
+import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -5,13 +6,19 @@ import javax.swing.JToolBar;
 import java.awt.GridLayout;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 import java.awt.event.ActionListener;
+import java.awt.image.ColorConvertOp;
+import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.kitfox.svg.app.beans.SVGIcon;
+import com.orsoncharts.Colors;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,52 +29,47 @@ public class ToolBar extends JPanel {
 
 
 	/**
-	 * Create the panel.
+	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+	private static final Action label = null;
+
+	/**
+	 * Create the panel.
+	 * @return 
+	 */
+	
+	
 	public ToolBar() {
-		setLayout(new GridLayout(1, 0, 0, 0));
 		
+		HashMap<String, Object> Colours = new HashMap<>();
+		Colours.put("Dark",Color.BLACK);
+		Colours.put("Light",Color.WHITE);
+		
+		setLayout(new GridLayout(1, 0, 0, 0));	
 
 		JToolBar toolBar = new JToolBar();
 		toolBar.setOrientation(SwingConstants.VERTICAL);
 		add(toolBar);
-//		
-//		Icon icon = IconFontSwing.buildIcon(FontAwesome.USER, 45, new Color(0, 0, 0));
-//        JLabel label = new JLabel(icon);
-//        
-//        Icon icon1 = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 45, new Color(0, 0, 0));
-//        JLabel label1 = new JLabel(icon1);
-//        
-//        Icon icon2 = IconFontSwing.buildIcon(FontAwesome.FOLDER, 45, new Color(0, 0, 0));
-//        JLabel label2 = new JLabel(icon2);
-//        
-//        Icon icon3 = IconFontSwing.buildIcon(FontAwesome.PAPER_PLANE, 45, new Color(0, 0, 0));
-//        JLabel label3 = new JLabel(icon3);
-//        
-//        
-//        toolBar.add(label);
-//        toolBar.add(label1);
-//        toolBar.add(label2);
-//        toolBar.add(label3);
+		IconFontSwing.register(FontAwesome.getIconFont());
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel.setIconTextGap(2);
-		lblNewLabel.setIcon(First.getSQIcon("/outline_person_black_24dp.png",45,45));
-		toolBar.add(lblNewLabel);
-	
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(First.getSQIcon("/outline_dashboard_black_24dp.png",45,45));
-		toolBar.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(First.getSQIcon("/outline_email_black_24dp.png",45,45));
-		toolBar.add(lblNewLabel_1);
+		Icon icon = IconFontSwing.buildIcon(FontAwesome.USER, 55, new Color(150,150,150));
+        JLabel label = new JLabel(icon);
+        
+        Icon icon1 = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 45, new Color(150, 150, 150));
+        JLabel label1 = new JLabel(icon1);
+        
+        Icon icon2 = IconFontSwing.buildIcon(FontAwesome.FOLDER, 45, new Color(150, 150, 150));
+        JLabel label2 = new JLabel(icon2);
+        
+        Icon icon3 = IconFontSwing.buildIcon(FontAwesome.PAPER_PLANE, 45, new Color(150, 150, 150));
+        JLabel label3 = new JLabel(icon3);
+        
+        toolBar.add(label);        
+        toolBar.add(label2);
+        toolBar.add(label3);
+        toolBar.add(label1);
 				
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(First.getSQIcon("/outline_calendar_today_black_24dp.png", 45,45));
-		toolBar.add(lblNewLabel_3);
-
 	}
-
+	
 }

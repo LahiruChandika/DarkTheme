@@ -46,10 +46,11 @@ import java.awt.Color;
 import javax.swing.JCheckBox;
 import java.awt.Component;
 import javax.swing.JSeparator;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 
 public class First {
-
 
 	private JFrame frame;
 	private Second second;
@@ -60,13 +61,14 @@ public class First {
 	private JLabel lblNewLabel_1;
 	
 	
-    public static void changeLaf(JFrame frame, String laf) {
+	public static void changeLaf(JFrame frame, String laf) {
         if (laf.equals("Dark")) {
         	try {
         	    UIManager.setLookAndFeel( new FlatDarkLaf() );
         	} catch( Exception e ) {
         	    System.err.println( "Failed to initialize LaF" );
         	}
+        	
         }
         if (laf.equals("Light")) {
         	try {
@@ -92,8 +94,7 @@ public class First {
 				try {
 					
 					window.frame.setMinimumSize(new Dimension(650,600));
-					window.frame.setVisible(true);
-					
+					window.frame.setVisible(true);					
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -120,7 +121,7 @@ public class First {
 					int minute= cal.get(Calendar.MINUTE);
 					int hour= cal.get(Calendar.HOUR);
 					
-					lblNewLabel_1.setText("Time "+hour+":"+minute+":"+second+"  Date "+year+"/"+month+"/"+day+" " );
+					lblNewLabel_1.setText("Date "+year+"/"+month+"/"+day+" "+"  Time "+hour+":"+minute+":"+second);
 					
 					sleep(1000);
 					}
@@ -175,7 +176,7 @@ public class First {
 		b = new JProgressBar(0,1000);
 		b.setPreferredSize(new Dimension(120, 25));
 		b.setValue(0);
-		b.setForeground(new Color(111, 209, 196));
+		b.setForeground(new Color(0, 174, 255));
 		b.setStringPainted(true);
 		panel.add(b);
 		
@@ -204,9 +205,9 @@ public class First {
 			@Override
 			public void onSelected(boolean selected) {
 				if (selected) {
-					changeLaf(frame, "Dark");
+					changeLaf(frame, "Dark");					
 				} else {
-					changeLaf(frame, "Light");
+					changeLaf(frame, "Light");				
 				}
 				
 			}
@@ -231,6 +232,18 @@ public class First {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Save");
 		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Back");
+		mnNewMenu.add(mntmNewMenuItem_3);
+		
+		JMenu mnNewMenu_1 = new JMenu("Edit");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Undo");
+		mnNewMenu_1.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Redo");
+		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		
 	}
@@ -261,4 +274,12 @@ public class First {
 	    }
 	  }
 		
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
 }

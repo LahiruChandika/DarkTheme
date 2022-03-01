@@ -49,6 +49,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.GridLayout;
 
 public class Second extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JTextField textField_1;
 	
 	static JProgressBar b;
