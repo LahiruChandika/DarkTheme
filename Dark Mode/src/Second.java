@@ -1,52 +1,38 @@
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JSplitPane;
-import java.awt.FlowLayout;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
-import java.util.Date;
-import java.util.Calendar;
-import java.util.Collections;
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JProgressBar;
-import javax.swing.JButton;
-import javax.swing.JDesktopPane;
-import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.awt.event.ActionEvent;
-import javax.swing.tree.DefaultTreeModel;
+import java.util.Collections;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
 
 //import DefaultMutableTreeNodeDeserializer.POJO;
 
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.awt.GridLayout;
+import javax.swing.tree.DefaultTreeModel;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonSyntaxException;
 
 public class Second extends JPanel {
 	/**
@@ -112,8 +98,6 @@ public class Second extends JPanel {
 		
 
 		JTree tree = new JTree();  // create a sample tree
-		Object topNode = tree.getModel().getRoot();  // a DefaultMutableTreeNode
-		
 		tree.setModel(new DefaultTreeModel(x));
 		
 		scrollPane.setViewportView(tree);

@@ -26,6 +26,9 @@
 	<classpathentry kind="lib" path="lib/jiconfont-open_iconic-1.1.1.3.jar"/>
 	<classpathentry kind="lib" path="lib/jiconfont-swing-1.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/jiconfont-typicons-2.0.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="lib/jnativehook-2.1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

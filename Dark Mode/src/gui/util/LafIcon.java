@@ -1,5 +1,6 @@
 package gui.util;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -43,20 +44,22 @@ public class LafIcon implements Icon {
         return UIManager.getLookAndFeel ().getClass ().getCanonicalName ();
     }
 
-    private Icon getCurrentIcon ()
-    {
+    private Icon getCurrentIcon () {
         return lafIcons.get ( getLaf () );
     }
 
-    public void paintIcon ( Component c, Graphics g, int x, int y )
-    {
+    public void paintIcon ( Component c, Graphics g, int x, int y )  {
         Icon icon = getCurrentIcon ();
-        if ( icon != null )
-        {
+        g.setColor(Color.red);
+//        g.drawOval(x, y, c.getHeight(), c.getWidth());
+        g.fillOval(x, y, c.getWidth(), c.getHeight());
+        
+        if ( icon != null ) {
+        	
             icon.paintIcon ( c, g, x, y );
         }
     }
-//
+
     public int getIconWidth ()
     {
         Icon icon = getCurrentIcon ();
@@ -74,9 +77,9 @@ public class LafIcon implements Icon {
         installMetalLookAndFeel ();
 
         JFrame frame = new JFrame ();
-        frame.setLayout ( new FlowLayout ( FlowLayout.CENTER, 5, 5 ) );
+        frame.getContentPane().setLayout ( new FlowLayout ( FlowLayout.CENTER, 5, 5 ) );
 
-        frame.add ( new JButton ( "Test button", createIcon() ) );
+        frame.getContentPane().add ( new JButton ( "Test button", createIcon() ) );
 
         String[] laf = { "Metal Look and Feel", "Nimbus Look and Feel" };
         final JComboBox lafType = new JComboBox ( laf );
@@ -94,7 +97,7 @@ public class LafIcon implements Icon {
                 }
             }
         } );
-        frame.add ( lafType );
+        frame.getContentPane().add ( lafType );
 
         frame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
         frame.pack ();
@@ -141,6 +144,7 @@ public class LafIcon implements Icon {
 
     private static void installMetalLookAndFeel ()
     {
+    	
         installLookAndFeel ( MetalLookAndFeel.class.getCanonicalName () );
     }
 
@@ -181,7 +185,5 @@ public class LafIcon implements Icon {
         {
             e.printStackTrace ();
         }
-    }
-
-	
+    }	
 }

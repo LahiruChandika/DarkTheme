@@ -1,14 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Vector;
 
 import javax.swing.JPanel;
 
@@ -18,15 +10,17 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
 
 public class Graph extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Create the panel.
 	 * @throws IOException 
@@ -60,8 +54,7 @@ public class Graph extends JPanel {
 	    for (int i = 0; i < 4; i++) {
 	    	double tmpVal = Math.random()*1000;
 			for (int j = 0; j < 22; j++) {
-				double val = (i==0)? tmpVal:Math.random()*1000;
-				
+				double val = (i==0)? tmpVal:Math.random()*1000;				
 				dataset.addValue(val, i+" user", j+1+" day");	
 			}
 		}

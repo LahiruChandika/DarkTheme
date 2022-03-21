@@ -1,64 +1,72 @@
 import java.awt.BorderLayout;
-
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.TitledBorder;
+
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
+import org.jnativehook.dispatcher.SwingDispatchService;
+import org.jnativehook.keyboard.NativeKeyEvent;
+import org.jnativehook.keyboard.NativeKeyListener;
+import org.jnativehook.mouse.NativeMouseEvent;
+import org.jnativehook.mouse.NativeMouseInputListener;
+import org.jnativehook.mouse.NativeMouseWheelEvent;
+import org.jnativehook.mouse.NativeMouseWheelListener;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import eu.hansolo.custom.SteelCheckBox;
-import eu.hansolo.custom.SteelCheckBoxUI;
 import gui.util.EventSwitchSelected;
 import gui.util.SwitchButton;
-import jiconfont.icons.font_awesome.FontAwesome;
-import jiconfont.swing.IconFontSwing;
-
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import java.awt.Color;
-import javax.swing.JCheckBox;
-import java.awt.Component;
-import javax.swing.JSeparator;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 
-public class First {
+public class First extends JFrame implements ActionListener, ItemListener,
+NativeKeyListener, NativeMouseInputListener, NativeMouseWheelListener, WindowListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private Second second;
 	private ToolBar toolBar;	
 	static int x;
-	static JProgressBar b;
+	static JProgressBar p;
 	private SwitchButton switchbutton;
 	private JLabel lblNewLabel_1;
+	private int i = 100;
+	int a = 100;
+	
+    private static final Logger log = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 	
 	
 	public static void changeLaf(JFrame frame, String laf) {
@@ -100,7 +108,7 @@ public class First {
 					e.printStackTrace();
 				}
 		
-		window.loop();
+		window.progrs();
 	
 	}
 	
@@ -135,15 +143,18 @@ public class First {
 		clock.start();
 	}
 	
-	/**
-	 * Create the application.
-	 * @throws IOException 
-	 * @throws JsonIOException 
-	 * @throws JsonSyntaxException 
-	 */
+
 	public First() throws JsonSyntaxException, JsonIOException, IOException {
 		
 		second = new Second();
+		
+        log.setUseParentHandlers(false);
+        log.setLevel(Level.OFF);
+
+        // Setup a generic ConsoleHandler
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setLevel(Level.ALL);
+        log.addHandler(handler);
 		
 		JSeparator separator = new JSeparator();
 		separator.setPreferredSize(new Dimension(0, 20));
@@ -155,9 +166,7 @@ public class First {
 		clock();
 	}
 
-	/*
-	 * *Initialize the contents of the frame.
-	 */
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 488, 407);
@@ -173,12 +182,12 @@ public class First {
 		panel.add(lblNewLabel_1);
 		
 		
-		b = new JProgressBar(0,1000);
-		b.setPreferredSize(new Dimension(120, 25));
-		b.setValue(0);
-		b.setForeground(new Color(0, 174, 255));
-		b.setStringPainted(true);
-		panel.add(b);
+		p = new JProgressBar(0,100);
+		p.setPreferredSize(new Dimension(120, 25));
+		p.setValue(0);
+		p.setForeground(new Color(0, 174, 255));
+		p.setStringPainted(true);
+		panel.add(p);
 		
 		
 		JButton btnNewButton = new JButton("Click");
@@ -224,27 +233,19 @@ public class First {
 		panel_2.setLayout(new BorderLayout(0, 0));
 		panel_2.add(toolBar);
 		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("File");
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Save");
-		mnNewMenu.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Back");
-		mnNewMenu.add(mntmNewMenuItem_3);
-		
-		JMenu mnNewMenu_1 = new JMenu("Edit");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Undo");
-		mnNewMenu_1.add(mntmNewMenuItem_1);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Redo");
-		mnNewMenu_1.add(mntmNewMenuItem_2);
-		
+
+	GlobalScreen.setEventDispatcher(new SwingDispatchService());
+         try {
+				GlobalScreen.registerNativeHook();
+			} catch (NativeHookException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+     GlobalScreen.addNativeKeyListener(this);
+     GlobalScreen.addNativeMouseListener(this);
+     GlobalScreen.addNativeMouseMotionListener(this);
+     GlobalScreen.addNativeMouseWheelListener(this);
+     setVisible(true);
 		
 	}
 
@@ -257,29 +258,139 @@ public class First {
 	}
 	
 	
-	public void loop()
-	  {
-	    int i=0; 
-	    while(i <= 1000)
-	    {
-	      // fills the bar
-	      b.setValue(i);  
-	      i = i + 20;  
-	      try
-	      {
-	        // delay the thread 
-	        Thread.sleep(120);
-	      }
-	      catch(Exception e){}
-	    }
-	  }
+	public void progrs() {
 		
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+		while(i>=0) {
+			p.setValue(i);
+			i -=1;
+			try {
+				Thread.sleep(100);
+			} catch (Exception e2) {
+			}
+		if (i == 0) {
+			JOptionPane.showMessageDialog(frame , "Not active.", "Error" ,JOptionPane.YES_NO_OPTION );
+			p.setValue(a);
+			i=100;
+			}
 		}
-		public void actionPerformed(ActionEvent e) {
-		}
+	}
+		
+	public void itemStateChanged(ItemEvent e) {
+ 
+	    }
+
+	@Override
+	public void nativeMouseClicked(NativeMouseEvent arg0) {
+		// TODO Auto-generated method stub
+		 p.setValue(a);
+	     i=100;
+	}
+
+	@Override
+	public void nativeMousePressed(NativeMouseEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void nativeMouseReleased(NativeMouseEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void nativeMouseDragged(NativeMouseEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void nativeMouseMoved(NativeMouseEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+    
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		try {
+            GlobalScreen.unregisterNativeHook();
+        } catch (NativeHookException ex) {
+            ex.printStackTrace();
+        }
+
+        System.runFinalization();
+        System.exit(0);
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void nativeMouseWheelMoved(NativeMouseWheelEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void nativeKeyPressed(NativeKeyEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void nativeKeyReleased(NativeKeyEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void nativeKeyTyped(NativeKeyEvent arg0) {
+		// TODO Auto-generated method stub
+        p.setValue(a);
+        i=100;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 	}
 }
