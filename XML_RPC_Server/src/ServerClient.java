@@ -27,7 +27,6 @@ public class ServerClient {
 		clnt = null;
 		ccf = null;
 	}
-	
 
 	public static void main(String[] args) throws Exception {
 		 ServerClient.input(port);
