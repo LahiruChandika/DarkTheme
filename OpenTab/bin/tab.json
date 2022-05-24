@@ -1,0 +1,24 @@
+[	
+	{"tabs":
+		{
+			"TabTitle": "Emp_1",
+			"Name" : "Lahiru",
+			"Age":"25"
+		}
+	},
+	{"tabs":
+		{
+			"TabTitle": "Emp_2",
+			"Name" : "Nipun",
+			"Age":"25"
+		}
+	},
+	{"tabs":
+		{
+			"TabTitle": "Emp_3",
+			"Name" : "Nimal",
+			"Age":"30"
+		}
+	}
+		
+]
