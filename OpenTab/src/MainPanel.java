@@ -28,20 +28,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 import java.awt.Font;
 
 public class MainPanel {
 
-	private static final String String = null;
 	private JFrame frame;
 	public static JTabbedPane tabbedPane;
 	public static JPanel panel;
+	public static JSONArray tabList;
 	
 	public static String tTitle;
 	public static String name;
 	public static String age;
 	
-	public static int x=3;
+	public static Vector<JSONObject> tabs = new Vector<JSONObject>();
 
 	public static void main(String[] args) throws UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel((LookAndFeel)new FlatLightLaf());
@@ -49,7 +50,6 @@ public class MainPanel {
 			public void run() {
 				try {
 					MainPanel window = new MainPanel();
-//					Tab t=new Tab();
 					window.frame.setMinimumSize(new Dimension(650, 600));
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -63,35 +63,39 @@ public class MainPanel {
 		initialize();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initialize() throws IOException {
 		
 		JSONParser jsonP = new JSONParser();
 		try(FileReader reader = new FileReader("lib/tab.json")){
 			   //Read JSON File
 			   Object obj = jsonP.parse(reader);
-			   JSONArray tabList = (JSONArray) obj;
-//			   System.out.println(tabList);
+			   tabList = (JSONArray) obj ;
+
 			   //Iterate over tab array
 			   tabList.forEach(tab -> parseTabObj((JSONObject)tab));
-			  }
-			  catch (FileNotFoundException e) {
-			            e.printStackTrace();
-			        } catch (IOException e) {
-			            e.printStackTrace();
-			        } catch (ParseException e) {
-			            e.printStackTrace();
-			        }
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+        } catch (ParseException e) {
+        	e.printStackTrace();
+        }
 		
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 873, 519);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-
-		JPanel panel[]= new JPanel[x];
-		for (int i = 0; i < panel.length; i++) {
+		//loop panel
+		JPanel panel[]= new JPanel[tabs.size()];
+		for (int i = 0; i < tabs.size(); i++) {
+			JSONObject obj = tabs.get(i);
+			tTitle = (String) obj.get("TabTitle");
+			name = (String) obj.get("Name");
+			age = (String) obj.get("Age");
 			
 			panel[i] = new JPanel();
 			tabbedPane.addTab(tTitle, null, panel[i], null);
@@ -146,11 +150,11 @@ public class MainPanel {
 		
 		}
 		
-		
 	}
 	
-	 private static JSONObject parseTabObj(JSONObject tab) {
+	 private static void parseTabObj(JSONObject tab) {
 		  JSONObject tabObj = (JSONObject) tab.get("tabs");
+
 		  //get tab TabTitle, Name, Age
 		  tTitle = (String) tabObj.get("TabTitle");
 		  name = (String) tabObj.get("Name");
@@ -158,9 +162,9 @@ public class MainPanel {
 		  System.out.println("Tab Title: " + tTitle);
 		  System.out.println("Name: " + name);
 		  System.out.println("Age: " + age);
-		
-		  return tabObj;
+		  tabs.add(tabObj);
 		  
 	}
 
 }
+
