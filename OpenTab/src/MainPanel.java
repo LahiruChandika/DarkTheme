@@ -68,20 +68,19 @@ public class MainPanel {
 		
 		JSONParser jsonP = new JSONParser();
 		try(FileReader reader = new FileReader("lib/tab.json")){
-			   //Read JSON File
-			   Object obj = jsonP.parse(reader);
-			   tabList = (JSONArray) obj ;
+			//Read JSON File
+			Object obj = jsonP.parse(reader);
+			tabList = (JSONArray) obj ;
 
-			   //Iterate over tab array
-			   tabList.forEach(tab -> parseTabObj((JSONObject)tab));
+			//Iterate over tab array
+			tabList.forEach(tab -> parseTabObj((JSONObject)tab));
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
         } catch (ParseException e) {
         	e.printStackTrace();
-        }
-		
+        }	
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 873, 519);
@@ -105,7 +104,6 @@ public class MainPanel {
 			gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel[i].setLayout(gbl_panel);
-		
 		
 			JLabel lbl_tabTitle = new JLabel(tTitle);
 			lbl_tabTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -146,10 +144,8 @@ public class MainPanel {
 			GridBagConstraints gbc_lblAge = new GridBagConstraints();
 			gbc_lblAge.gridx = 5;
 			gbc_lblAge.gridy = 6;
-			panel[i].add(lblAge, gbc_lblAge);
-		
-		}
-		
+			panel[i].add(lblAge, gbc_lblAge);		
+		}	
 	}
 	
 	 private static void parseTabObj(JSONObject tab) {
@@ -162,9 +158,7 @@ public class MainPanel {
 		  System.out.println("Tab Title: " + tTitle);
 		  System.out.println("Name: " + name);
 		  System.out.println("Age: " + age);
-		  tabs.add(tabObj);
-		  
+		  tabs.add(tabObj);	  
 	}
-
 }
 
