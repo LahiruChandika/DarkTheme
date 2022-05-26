@@ -17,17 +17,12 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 import java.awt.Font;
 
@@ -71,6 +66,7 @@ public class MainPanel {
 			//Read JSON File
 			Object obj = jsonP.parse(reader);
 			tabList = (JSONArray) obj ;
+			System.out.println(tabList);
 
 			//Iterate over tab array
 			tabList.forEach(tab -> parseTabObj((JSONObject)tab));
